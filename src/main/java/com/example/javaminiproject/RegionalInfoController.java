@@ -19,4 +19,25 @@ public class RegionalInfoController {
         Parent root = loader.load();
         SeaExplorer.scene.setRoot(root);
     }
+
+    @FXML
+    private void onWeatherButtonClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Weather.fxml"));
+        Parent root = loader.load();
+        SeaExplorer.scene.setRoot(root);
+    }
+
+    @FXML
+    private void onMapButtonClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Map.fxml"));
+        Parent root = loader.load();
+        SeaExplorer.scene.setRoot(root);
+    }
+
+    @FXML
+    private void onRecommendationsButtonClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Recommendations.fxml"));
+        Parent root = loader.load();
+        SeaExplorer.scene.setRoot(root);
+    }
 }
