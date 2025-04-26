@@ -11,7 +11,7 @@
     -fx-background-repeat: no-repeat;
     -fx-text-fill: white;
     -fx-alignment: top-center;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
   }
 
   .weather-button {
@@ -20,6 +20,15 @@
     -fx-background-repeat: no-repeat;
     -fx-text-fill: white;
     -fx-alignment: top-center;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+  }
+
+  .map-button {
+    -fx-background-image: url("images/dashboard/map.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-text-fill: white;
+    -fx-alignment: top-center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
   }
 }
