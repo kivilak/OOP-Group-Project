@@ -105,14 +105,19 @@
             </Pane>
          </children>
       </Pane>
-      <Pane onDragDetected="#onWeatherButtonClicked" prefHeight="768.0" prefWidth="1040.0" styleClass="dashboard-pane">
+      <Pane fx:id="dashboard" prefHeight="768.0" prefWidth="1040.0" styleClass="dashboard-pane">
          <children>
-            <Button id="regional-info" layoutX="55.0" layoutY="58.0" mnemonicParsing="false" onAction="#onRegionalInfoButtonClicked" prefHeight="312.0" prefWidth="265.0" styleClass="regional-info-button" text="Regional Info">
+            <Button id="regional-info" fx:id="regional_info_button" layoutX="54.0" layoutY="143.0" mnemonicParsing="false" onAction="#onRegionalInfoButtonClicked" prefHeight="312.0" prefWidth="265.0" styleClass="regional-info-button" text="Regional Info">
                <font>
                   <Font name="Fira Code SemiBold" size="28.0" />
                </font>
             </Button>
-            <Button id="regional-info" layoutX="360.0" layoutY="58.0" mnemonicParsing="false" onAction="#onWeatherButtonClicked" prefHeight="312.0" prefWidth="265.0" styleClass="weather-button" text="Weather">
+            <Button id="weather" fx:id="weather_button" layoutX="359.0" layoutY="143.0" mnemonicParsing="false" onAction="#onWeatherButtonClicked" prefHeight="312.0" prefWidth="265.0" styleClass="weather-button" text="Weather">
+               <font>
+                  <Font name="Fira Code SemiBold" size="28.0" />
+               </font>
+            </Button>
+            <Button fx:id="map_button" layoutX="54.0" layoutY="495.0" mnemonicParsing="false" prefHeight="224.0" prefWidth="570.0" styleClass="map-button" text="Map">
                <font>
                   <Font name="Fira Code SemiBold" size="28.0" />
                </font>
