@@ -3,32 +3,82 @@
 }
 
 .dashboard-pane {
+  -fx-font: bold 28 "FiraCode";
 
-  .regional-info-button {
-    -fx-background-color: #3674B5;
-    -fx-background-image: url("images/dashboard/regional1.jpg");
-    -fx-background-size: cover;
-    -fx-background-repeat: no-repeat;
-    -fx-text-fill: white;
-    -fx-alignment: top-center;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+  .live-weather {
+    .label {
+      -fx-text-fill: #578FCA;
+    }
+
+    #title-label {
+      -fx-font-size: 24;
+    }
+
+    #temp-label {
+      -fx-font-size: 48;
+    }
+
+    #celsius-label {
+      -fx-font-size: 28;
+    }
+
+    #weather-label {
+      -fx-font-size: 18;
+    }
+
+    #location-label {
+      -fx-font: 28 "FiraCode";
+      -fx-text-fill: gray;
+    }
+
+    #day-label {
+      -fx-font: 18 "FiraCod";
+      -fx-text-fill: gray;
+    }
   }
 
-  .weather-button {
-    -fx-background-image: url("images/dashboard/weather_button.jpg");
-    -fx-background-size: cover;
-    -fx-background-repeat: no-repeat;
-    -fx-text-fill: white;
-    -fx-alignment: top-center;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
+  #title-label {
+    -fx-text-fill: #578FCA;
+    -fx-font: bold 48 "FiraCode";
   }
 
-  .map-button {
-    -fx-background-image: url("images/dashboard/map.jpg");
-    -fx-background-size: cover;
-    -fx-background-repeat: no-repeat;
-    -fx-text-fill: white;
-    -fx-alignment: top-center;
+  .stack-pane {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.5, 0, 0);
+
+    .button {
+      -fx-text-fill: white;
+    }
+
+    .regional-info-button {
+      -fx-background-color: #000;
+      -fx-background-image: url("images/dashboard/regional1.jpg");
+      -fx-background-size: cover;
+      -fx-background-repeat: no-repeat;
+      -fx-alignment: top-center;
+      -fx-pref-width: 265;
+      -fx-pref-height: 312;
+    }
+
+    .weather-button {
+      -fx-background-image: url("images/dashboard/weather_button.jpg");
+      -fx-background-size: cover;
+      -fx-background-repeat: no-repeat;
+      -fx-alignment: top-center;
+      -fx-pref-width: 265;
+      -fx-pref-height: 312;
+    }
+
+    .map-button {
+      -fx-background-image: url("images/dashboard/map.jpg");
+      -fx-background-size: cover;
+      -fx-background-repeat: no-repeat;
+      -fx-alignment: top-center;
+      -fx-pref-width: 570;
+      -fx-pref-height: 224;
+    }
+  }
+
+  .stack-pane:hover {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0);
   }
 }
