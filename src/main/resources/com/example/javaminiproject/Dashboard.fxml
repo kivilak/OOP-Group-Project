@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -46,7 +47,7 @@
                         <Font name="Fira Code SemiBold" size="18.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
+                        <ImageView fx:id="imageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
                            <image>
                               <Image url="@images/navigation/location.png" />
                            </image>
@@ -105,24 +106,14 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="dashboard" prefHeight="768.0" prefWidth="1040.0" styleClass="dashboard-pane">
+      <AnchorPane fx:id="dashboard" prefHeight="768.0" prefWidth="1040.0" styleClass="dashboard-pane">
          <children>
-            <Button id="regional-info" fx:id="regional_info_button" layoutX="54.0" layoutY="143.0" mnemonicParsing="false" onAction="#onRegionalInfoButtonClicked" prefHeight="312.0" prefWidth="265.0" styleClass="regional-info-button" text="Regional Info">
+            <Label id="title-label" layoutX="54.0" layoutY="14.0" prefHeight="70.0" prefWidth="309.0" text="Welcome!">
                <font>
-                  <Font name="Fira Code SemiBold" size="28.0" />
+                  <Font size="36.0" />
                </font>
-            </Button>
-            <Button id="weather" fx:id="weather_button" layoutX="359.0" layoutY="143.0" mnemonicParsing="false" onAction="#onWeatherButtonClicked" prefHeight="312.0" prefWidth="265.0" styleClass="weather-button" text="Weather">
-               <font>
-                  <Font name="Fira Code SemiBold" size="28.0" />
-               </font>
-            </Button>
-            <Button fx:id="map_button" layoutX="54.0" layoutY="495.0" mnemonicParsing="false" prefHeight="224.0" prefWidth="570.0" styleClass="map-button" text="Map">
-               <font>
-                  <Font name="Fira Code SemiBold" size="28.0" />
-               </font>
-            </Button>
-         </children></Pane>
+            </Label>
+         </children></AnchorPane>
    </children>
    <stylesheets>
       <URL value="@Dashboard.css" />
