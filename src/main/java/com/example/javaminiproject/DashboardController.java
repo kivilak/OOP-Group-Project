@@ -1,5 +1,6 @@
 package com.example.javaminiproject;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,12 +13,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import java.time.LocalDate;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
+    private final String location = "Sri Lanka";
     @FXML
     private AnchorPane dashboard;
 
@@ -70,55 +73,58 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void DisplayWeather() {
-        Pane pane = new Pane();
-        pane.getStyleClass().add("live-weather");
+        FetchWeatherInfo fetchWeatherInfo = new FetchWeatherInfo();
+        LocalDate date = LocalDate.now();
 
-        Label titleLabel = new Label("Live Weather");
-        Label tempLabel = new Label("32");
-        Label celsiusLabel = new Label("°C");
-        Label weatherLabel = new Label("Sunny");
-        Label locationLabel = new Label("Sri Lanka");
-        Label dayLabel = new Label("Monday");
-
-        DisplayLabel("title-label", titleLabel, pane,20, 20);
-        DisplayLabel("temp-label", tempLabel, pane,20, 80);
-        DisplayLabel("celsius-label", celsiusLabel, pane,80, 100);
-        DisplayLabel("weather-label", weatherLabel, pane,20, 130);
-        DisplayLabel("location-label", locationLabel, pane,20, 180);
-        DisplayLabel("day-label", dayLabel, pane,20, 210);
-
-        try {
-            // Use getClass().getResource() to properly locate the resource
-            URL imageUrl = getClass().getResource("images/dashboard/sunny.png");
-            if (imageUrl == null) {
-                System.err.println("Cannot find image at path: images/dashboard/sunny.png");
-                // You could use a placeholder image instead
-            } else {
-                Image image = new Image(imageUrl.toExternalForm());
-                ImageView imageView = new ImageView(image);
-                imageView.setFitHeight(70);
-                imageView.setFitWidth(70);
-                imageView.setPreserveRatio(true);
-
-                imageView.setLayoutX(130);
-                imageView.setLayoutY(80);
-
-                pane.getChildren().add(imageView);
+        Task<WeatherInfo> weatherTask = new Task<>() {
+            @Override
+            protected WeatherInfo call() {
+                return fetchWeatherInfo.getWeatherInfo("Sri%20Lanka");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error loading image: " + e.getMessage());
-        }
+        };
 
-        //pane.getChildren().add(imageView);
-        //pane.getChildren().addAll(titleLabel, tempLabel, locationLabel, dayLabel);
-        pane.setLayoutX(664);
-        pane.setLayoutY(143);
-        dashboard.getChildren().add(pane);
+        weatherTask.setOnSucceeded(event -> {
+            WeatherInfo weatherInfo = weatherTask.getValue();
+
+            Pane pane = new Pane();
+            pane.getStyleClass().add("live-weather");
+
+            DisplayLabel("title-label", "Live Weather", pane, 20, 20);
+            DisplayLabel("temp-label", weatherInfo.getTemp(), pane, 20, 170);
+            DisplayLabel("celsius-label", "°C", pane, 150, 190);
+            DisplayLabel("weather-label", weatherInfo.getMain(), pane, 20, 220);
+            DisplayLabel("location-label", location, pane, 20, 250);
+            DisplayLabel("day-label", date.getDayOfWeek().toString(), pane, 20, 280);
+
+            String imageUrl = "https://openweathermap.org/img/wn/" + weatherInfo.getIconName() + "@4x.png";
+            try {
+                Image image = new Image(imageUrl, true);
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(150);
+                imageView.setFitWidth(150);
+                imageView.setPreserveRatio(true);
+                imageView.setLayoutX(70);
+                imageView.setLayoutY(40);
+                pane.getChildren().add(imageView);
+            } catch (Exception e) {
+                System.err.println("Error loading image: " + e.getMessage());
+            }
+
+            pane.setLayoutX(664);
+            pane.setLayoutY(143);
+            dashboard.getChildren().add(pane);
+        });
+
+        weatherTask.setOnFailed(event -> {
+            System.err.println("Failed to fetch weather data: " + weatherTask.getException().getMessage());
+        });
+
+        new Thread(weatherTask).start();
     }
 
     @FXML
-    private void DisplayLabel(String id, Label label, Pane pane, int layoutX, int layoutY) {
+    private void DisplayLabel(String id, String text, Pane pane, int layoutX, int layoutY) {
+        Label label = new Label(text);
         label.setId(id);
         label.setLayoutX(layoutX);
         label.setLayoutY(layoutY);
