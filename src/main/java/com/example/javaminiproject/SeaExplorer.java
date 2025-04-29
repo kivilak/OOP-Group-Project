@@ -20,6 +20,8 @@ public class SeaExplorer extends Application {
     }
 
     public static void main(String[] args) {
+        MySQLConnection mySQLConnection = new MySQLConnection();
+
         launch();
     }
 }
