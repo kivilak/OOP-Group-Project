@@ -72,14 +72,14 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void DisplayWeather() {
+    private void DisplayWeather() { // weather display card
         FetchWeatherInfo fetchWeatherInfo = new FetchWeatherInfo();
         LocalDate date = LocalDate.now();
 
         Task<WeatherInfo> weatherTask = new Task<>() {
             @Override
             protected WeatherInfo call() {
-                return fetchWeatherInfo.getWeatherInfo("Sri%20Lanka");
+                return fetchWeatherInfo.getCurrentWeatherInfo("Sri%20Lanka");
             }
         };
 
@@ -123,7 +123,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void DisplayLabel(String id, String text, Pane pane, int layoutX, int layoutY) {
+    private void DisplayLabel(String id, String text, Pane pane, int layoutX, int layoutY) { // create label and display
         Label label = new Label(text);
         label.setId(id);
         label.setLayoutX(layoutX);
@@ -133,7 +133,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void DisplayButton(Button button, String id, String className, int layoutX, int layoutY) {
+    private void DisplayButton(Button button, String id, String className, int layoutX, int layoutY) { // display button
         //button.setId(id);
         button.getStyleClass().add(className);
         button.setLayoutX(layoutX);
@@ -150,7 +150,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private Rectangle ButtonClipping(int width, int height) {
+    private Rectangle ButtonClipping(int width, int height) { // Style buttons
         Rectangle rectangle = new Rectangle(0, 0, width, height);
         rectangle.setArcHeight(30);
         rectangle.setArcWidth(30);

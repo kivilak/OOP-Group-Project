@@ -4,6 +4,8 @@ module com.example.javaminiproject {
     requires javafx.web;
     requires java.dotenv;
     requires org.json;
+    requires mysql.connector.j;
+    requires java.sql;
 
 
     opens com.example.javaminiproject to javafx.fxml;
