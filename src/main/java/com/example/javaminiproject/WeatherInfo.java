@@ -6,18 +6,18 @@ package com.example.javaminiproject;
 
 
 public class WeatherInfo {
-    private double temp;
-    private double tempMin;
-    private double tempMax;
-    private double feelsLike;
-    private int humidity;
-    private double pressure;
-    private double windSpeed;
-    private String main;
-    private String description;
-    private String iconName;
+    private final double temp;
+    private final double tempMin;
+    private final double tempMax;
+    private final double feelsLike;
+    private final int humidity;
+    private final double pressure;
+    private final double windSpeed;
+    private final String main;
+    private final String description;
+    private final String iconName;
 
-    public void setWeather(double temp, double tempMin, double tempMax, double feelsLike, int humidity, double pressure, double windSpeed, String main, String description, String iconName) {
+    public WeatherInfo(double temp, double tempMin, double tempMax, double feelsLike, int humidity, double pressure, double windSpeed, String main, String description, String iconName) {
         this.temp = temp;
         this.tempMin = tempMin;
         this.tempMax = tempMax;
