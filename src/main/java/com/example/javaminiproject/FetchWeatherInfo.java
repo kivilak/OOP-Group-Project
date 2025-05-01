@@ -120,6 +120,8 @@ public class FetchWeatherInfo {
             }
 
             in.close();
+        } else {
+            throw new IOException("HTTP request failed with response code: " + responseCode);
         }
 
         return content.toString();

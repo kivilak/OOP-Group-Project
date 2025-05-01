@@ -93,21 +93,46 @@ public class DashboardController implements Initializable {
             DisplayLabel("temp-label", weatherInfo.getTemp(), pane, 20, 170);
             DisplayLabel("celsius-label", "°C", pane, 150, 190);
             DisplayLabel("weather-label", weatherInfo.getMain(), pane, 20, 220);
-            DisplayLabel("location-label", location, pane, 20, 250);
-            DisplayLabel("day-label", date.getDayOfWeek().toString(), pane, 20, 280);
+            DisplayLabel("feels-label", "Feels like", pane, 20, 240);
+            DisplayLabel("feels-label", weatherInfo.getFeelsLike(), pane, 100, 240);
+            DisplayLabel("feels-label", "°C", pane, 150, 240);
+            DisplayLabel("location-label", location, pane, 20, 270);
+            DisplayLabel("day-label", date.getDayOfWeek().toString(), pane, 20, 300);
 
             String imageUrl = "https://openweathermap.org/img/wn/" + weatherInfo.getIconName() + "@4x.png";
+
+
             try {
-                Image image = new Image(imageUrl, true);
-                ImageView imageView = new ImageView(image);
-                imageView.setFitHeight(150);
-                imageView.setFitWidth(150);
-                imageView.setPreserveRatio(true);
-                imageView.setLayoutX(70);
-                imageView.setLayoutY(40);
-                pane.getChildren().add(imageView);
-            } catch (Exception e) {
-                System.err.println("Error loading image: " + e.getMessage());
+                DisplayImage(imageUrl, pane, 150, 150, 70, 40);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            URL wind_url = getClass().getResource("images/dashboard/wind.png");
+
+            try {
+                DisplayImage(wind_url.toString(), pane, 30, 30, 20, 350);
+                DisplayLabel("wind-speed", weatherInfo.getWindSpeed() + " m/s", pane, 70, 345);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            URL humidity_url = getClass().getResource("images/dashboard/humidity.png");
+
+            try {
+                DisplayImage(humidity_url.toString(), pane, 30, 30, 20, 400);
+                DisplayLabel("humidity", weatherInfo.getHumidity() + "%", pane, 70, 395);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            URL pressure_url = getClass().getResource("images/dashboard/pressure.png");
+
+            try {
+                DisplayImage(pressure_url.toString(), pane, 30, 30, 20, 450);
+                DisplayLabel("pressure", weatherInfo.getPressure() + " hPa", pane, 70, 445);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
             pane.setLayoutX(664);
@@ -120,6 +145,22 @@ public class DashboardController implements Initializable {
         });
 
         new Thread(weatherTask).start();
+    }
+
+    @FXML
+    private void DisplayImage(String url, Pane pane, int width, int height, int layoutX, int layoutY) throws IOException {
+        if(url != null) {
+            Image image = new Image(url, true);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(height);
+            imageView.setFitWidth(width);
+            imageView.setPreserveRatio(true);
+            imageView.setLayoutX(layoutX);
+            imageView.setLayoutY(layoutY);
+            pane.getChildren().add(imageView);
+        } else {
+            throw new IOException(url + " is null");
+        }
     }
 
     @FXML
