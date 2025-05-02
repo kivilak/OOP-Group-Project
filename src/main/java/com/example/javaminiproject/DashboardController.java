@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+
 import java.time.LocalDate;
 
 import java.io.IOException;
@@ -64,9 +65,9 @@ public class DashboardController implements Initializable {
             }
         });
 
-        DisplayButton(regional_info_button, "regional-info", "regional-info-button", 54, 143);
-        DisplayButton(weather_button, "weather", "weather-button", 359, 143);
-        DisplayButton(map_button, "map", "map-button", 54, 495);
+        DisplayButton(regional_info_button, "regional-info", "regional-info-button", 54, 123);
+        DisplayButton(weather_button, "weather", "weather-button", 359, 123);
+        DisplayButton(map_button, "map", "map-button", 54, 475);
 
         DisplayWeather();
     }
@@ -91,11 +92,11 @@ public class DashboardController implements Initializable {
 
             DisplayLabel("title-label", "Live Weather", pane, 20, 20);
             DisplayLabel("temp-label", weatherInfo.getTemp(), pane, 20, 170);
-            DisplayLabel("celsius-label", "°C", pane, 150, 190);
+            DisplayLabel("celsius-label", "°C", pane, 120, 190);
             DisplayLabel("weather-label", weatherInfo.getMain(), pane, 20, 220);
             DisplayLabel("feels-label", "Feels like", pane, 20, 240);
             DisplayLabel("feels-label", weatherInfo.getFeelsLike(), pane, 100, 240);
-            DisplayLabel("feels-label", "°C", pane, 150, 240);
+            DisplayLabel("feels-label", "°C", pane, 135, 240);
             DisplayLabel("location-label", location, pane, 20, 270);
             DisplayLabel("day-label", date.getDayOfWeek().toString(), pane, 20, 300);
 
@@ -111,6 +112,7 @@ public class DashboardController implements Initializable {
             URL wind_url = getClass().getResource("images/dashboard/wind.png");
 
             try {
+                assert wind_url != null;
                 DisplayImage(wind_url.toString(), pane, 30, 30, 20, 350);
                 DisplayLabel("wind-speed", weatherInfo.getWindSpeed() + " m/s", pane, 70, 345);
             } catch (IOException e) {
@@ -120,6 +122,7 @@ public class DashboardController implements Initializable {
             URL humidity_url = getClass().getResource("images/dashboard/humidity.png");
 
             try {
+                assert humidity_url != null;
                 DisplayImage(humidity_url.toString(), pane, 30, 30, 20, 400);
                 DisplayLabel("humidity", weatherInfo.getHumidity() + "%", pane, 70, 395);
             } catch (IOException e) {
@@ -129,6 +132,7 @@ public class DashboardController implements Initializable {
             URL pressure_url = getClass().getResource("images/dashboard/pressure.png");
 
             try {
+                assert pressure_url != null;
                 DisplayImage(pressure_url.toString(), pane, 30, 30, 20, 450);
                 DisplayLabel("pressure", weatherInfo.getPressure() + " hPa", pane, 70, 445);
             } catch (IOException e) {
@@ -136,7 +140,7 @@ public class DashboardController implements Initializable {
             }
 
             pane.setLayoutX(664);
-            pane.setLayoutY(143);
+            pane.setLayoutY(123);
             dashboard.getChildren().add(pane);
         });
 
@@ -149,18 +153,14 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void DisplayImage(String url, Pane pane, int width, int height, int layoutX, int layoutY) throws IOException {
-        if(url != null) {
-            Image image = new Image(url, true);
-            ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(height);
-            imageView.setFitWidth(width);
-            imageView.setPreserveRatio(true);
-            imageView.setLayoutX(layoutX);
-            imageView.setLayoutY(layoutY);
-            pane.getChildren().add(imageView);
-        } else {
-            throw new IOException(url + " is null");
-        }
+        Image image = new Image(url, true);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(height);
+        imageView.setFitWidth(width);
+        imageView.setPreserveRatio(true);
+        imageView.setLayoutX(layoutX);
+        imageView.setLayoutY(layoutY);
+        pane.getChildren().add(imageView);
     }
 
     @FXML
