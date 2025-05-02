@@ -6,6 +6,8 @@ module com.example.javaminiproject {
     requires org.json;
     requires mysql.connector.j;
     requires java.sql;
+    requires java.desktop;
+    requires annotations;
 
 
     opens com.example.javaminiproject to javafx.fxml;

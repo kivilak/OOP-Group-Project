@@ -110,6 +110,6 @@
             </Pane>
          </children>
       </Pane>
-      <Pane prefHeight="768.0" prefWidth="1060.0" styleClass="map-pane" />
+      <Pane fx:id="map_dashboard" prefHeight="768.0" prefWidth="1060.0" styleClass="map-pane" />
    </children>
 </HBox>
