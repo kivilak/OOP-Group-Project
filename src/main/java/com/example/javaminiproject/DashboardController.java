@@ -91,12 +91,12 @@ public class DashboardController implements Initializable {
             pane.getStyleClass().add("live-weather");
 
             DisplayLabel("title-label", "Live Weather", pane, 20, 20);
-            DisplayLabel("temp-label", weatherInfo.getTemp(), pane, 20, 170);
-            DisplayLabel("celsius-label", "°C", pane, 120, 190);
+            DisplayLabel("temp-label", weatherInfo.getTemp() + " °c", pane, 20, 170);
+            //DisplayLabel("celsius-label", "°C", pane, 120, 190);
             DisplayLabel("weather-label", weatherInfo.getMain(), pane, 20, 220);
             DisplayLabel("feels-label", "Feels like", pane, 20, 240);
-            DisplayLabel("feels-label", weatherInfo.getFeelsLike(), pane, 100, 240);
-            DisplayLabel("feels-label", "°C", pane, 135, 240);
+            DisplayLabel("feels-label", weatherInfo.getFeelsLike() + " °c", pane, 100, 240);
+            //DisplayLabel("feels-label", "°C", pane, 135, 240);
             DisplayLabel("location-label", location, pane, 20, 270);
             DisplayLabel("day-label", date.getDayOfWeek().toString(), pane, 20, 300);
 
