@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 
-/**
- * @author Kivilak Chathuranga
- */
 
 
 public class WeatherController {
@@ -33,9 +30,18 @@ public class WeatherController {
         SeaExplorer.scene.setRoot(root);
     }
 
+
+
     @FXML
     private void onRecommendationsButtonClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Recommendations.fxml"));
+        Parent root = loader.load();
+        SeaExplorer.scene.setRoot(root);
+    }
+
+    @FXML
+    private void onBackButtonClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
         Parent root = loader.load();
         SeaExplorer.scene.setRoot(root);
     }
