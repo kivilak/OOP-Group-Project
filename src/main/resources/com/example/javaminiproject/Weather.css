@@ -11,15 +11,18 @@
 
 .weather-pane Label {
     -fx-text-fill: #333;
+
 }
 
 .weather-pane Button {
     -fx-background-color: #0277bd;
     -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 20px;
     -fx-padding: 6px 12px;
-    -fx-background-radius: 8px;
+    -fx-background-radius: 18px;
     -fx-cursor: hand;
+    -fx-border-color: #578FCA;
+    -fx-border-radius: 18px;
 }
 
 .weather-pane Button:hover {
@@ -78,4 +81,11 @@ VBox Label:first-child {
 .today-info Label {
     -fx-font-size: 22px;
     -fx-text-fill: #333;
+}
+
+#topLable
+{
+    -fx-background-color: #0277bd;
+    -fx-text-fill: white;
+
 }
