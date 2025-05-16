@@ -87,5 +87,14 @@ VBox Label:first-child {
 {
     -fx-background-color: #0277bd;
     -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+
+}
+
+#day1,#day2,#day3,#day4,#day5,#day6,#day7
+{
+    -fx-font-size: 24px;
+    -fx-text-fill: #032e80;
 
 }

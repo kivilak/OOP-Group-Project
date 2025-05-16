@@ -127,7 +127,7 @@
                      </font>
                   </Button>
                   <TextField alignment="CENTER" layoutX="843.0" layoutY="19.0" promptText="Search" />
-                  <ImageView fitHeight="25.0" fitWidth="16.0" layoutX="849.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="25.0" fitWidth="16.0" layoutX="849.0" layoutY="25.0" opacity="0.62" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/weather/search.png" />
                      </image>
@@ -138,7 +138,7 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="131.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Mon" textFill="#0f1ae8">
+                        <Label fx:id="day1" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Mon" textFill="#0f1ae8">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -148,7 +148,7 @@
                               <Image url="@images/weather/clouds.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
+                        <Label fx:id="day1W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -157,7 +157,7 @@
                   </VBox>
                   <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Tue">
+                        <Label fx:id="day2" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Tue">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -167,7 +167,7 @@
                               <Image url="@images/weather/drizzle.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
+                        <Label fx:id="day2W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -176,7 +176,7 @@
                   </VBox>
                   <VBox layoutX="141.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Wed">
+                        <Label fx:id="day3" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Wed">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -186,7 +186,7 @@
                               <Image url="@images/weather/mist.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
+                        <Label fx:id="day3W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -195,7 +195,7 @@
                   </VBox>
                   <VBox layoutX="272.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Thu">
+                        <Label fx:id="day4" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Thu">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -205,7 +205,7 @@
                               <Image url="@images/weather/rain.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
+                        <Label fx:id="day4W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -214,7 +214,7 @@
                   </VBox>
                   <VBox layoutX="403.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Fri">
+                        <Label fx:id="day5" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Fri">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -224,7 +224,7 @@
                               <Image url="@images/weather/clouds.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
+                        <Label fx:id="day5W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -233,7 +233,7 @@
                   </VBox>
                   <VBox layoutX="534.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Sat">
+                        <Label fx:id="day6" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Sat">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -243,7 +243,7 @@
                               <Image url="@images/weather/clouds.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
+                        <Label fx:id="day6W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -252,7 +252,7 @@
                   </VBox>
                   <VBox layoutX="665.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Sun">
+                        <Label fx:id="day7" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Sun">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -262,7 +262,7 @@
                               <Image url="@images/weather/clouds.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
+                        <Label fx:id="day7W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
                            <font>
                               <Font size="24.0" />
                            </font>
