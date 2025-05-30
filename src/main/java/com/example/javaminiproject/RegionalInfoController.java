@@ -83,8 +83,8 @@ public class RegionalInfoController {
         }
 
         public void setRating(float rating) {
-            this.rating =; rating;
-    }
+            this.rating = rating;
+        }
     }
 
 

@@ -13,6 +13,18 @@ import java.io.IOException;
 
 public class RecommendationsController {
     @FXML
+    private ListView<String> HotelList;
+
+    @FXML
+    private ListView<String> PlacesList;
+
+    @FXML
+    private TextField SearchBar;
+
+    @FXML
+    private Button SearchBtn;
+
+    @FXML
     private void onHomeButtonClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
         Parent root = loader.load();
