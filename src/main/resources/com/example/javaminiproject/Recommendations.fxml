@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.net.URL?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Group?>
@@ -118,9 +117,14 @@
             <Group layoutX="267.0" layoutY="69.0">
                <children>
                   <TextField fx:id="SearchBar" layoutX="5.0" layoutY="4.0" prefHeight="42.0" prefWidth="495.0" styleClass="SerchBar" />
-                  <Button fx:id="SearchBtn" layoutX="460.0" layoutY="5.0" mnemonicParsing="false" styleClass="SearchBtn">
+                  <Button fx:id="SearchBtn" layoutX="454.0" layoutY="5.0" mnemonicParsing="false" styleClass="SearchBtn">
                      <graphic>
-                        <FontAwesomeIconView glyphName="SEARCH" size="25" />
+<!--                        <FontAwesomeIconView glyphName="SEARCH" size="25" />-->
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/Recommandations/search.png" />
+                           </image>
+                        </ImageView>
                      </graphic>
                   </Button>
                </children>
