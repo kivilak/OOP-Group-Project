@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaminiproject.MapController">
    <stylesheets>
       <URL value="@Navigation.css" />
@@ -84,21 +83,6 @@
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
                            <image>
                               <Image url="@images/navigation/map.png" />
-                           </image>
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button id="recommendations" layoutX="44.0" layoutY="307.0" mnemonicParsing="false" onAction="#onRecommendationsButtonClicked" prefHeight="217.0" prefWidth="296.0" text="Recommendations">
-                     <font>
-                        <Font name="Fira Code SemiBold" size="18.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
-                           <image>
-                              <Image url="@images/navigation/favorite.png" />
                            </image>
                            <viewport>
                               <Rectangle2D />
