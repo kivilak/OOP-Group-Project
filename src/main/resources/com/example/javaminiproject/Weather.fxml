@@ -101,7 +101,7 @@
             <VBox layoutX="7.0" />
             <Pane>
                <children>
-                  <Label fx:id="topLable" alignment="CENTER" layoutX="-7.0" prefHeight="67.0" prefWidth="1034.0" styleClass="weather-forecast">
+                  <Label fx:id="topLable" alignment="CENTER" layoutX="-5.0" prefHeight="67.0" prefWidth="1037.0" styleClass="weather-forecast">
                      <font>
                         <Font size="22.0" />
                      </font>

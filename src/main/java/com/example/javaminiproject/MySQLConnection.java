@@ -2,9 +2,7 @@ package com.example.javaminiproject;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * @author Kivilak Chathuranga
@@ -43,4 +41,44 @@ public class MySQLConnection {
         return connection;
     }
 
+    public RegionalInfo[] getRegionalInfo() {
+        RegionalInfo[] regionalInfo = null;
+        ResultSet resultSet = null;
+        PreparedStatement statement = null;
+        String sql = "SELECT * FROM details";
+
+        try {
+            statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            resultSet = statement.executeQuery();
+            int rows = 0;
+
+            if(resultSet.last()) {
+                rows = resultSet.getRow();
+                resultSet.beforeFirst(); // Move cursor back to the start
+            }
+
+            regionalInfo = new RegionalInfo[rows];
+
+            while(resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String small_description = resultSet.getString("small_des");
+                String description = resultSet.getString("des");
+                String imageUrl = resultSet.getString("img_url");
+                String district = resultSet.getString("district");
+                String location = resultSet.getString("location");
+                String type = resultSet.getString("type");
+                double rating = resultSet.getDouble("rating");
+
+                regionalInfo[resultSet.getRow() - 1] = new RegionalInfo(id, name, small_description, description, imageUrl, district, location, type, (float) rating);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(regionalInfo[0].toString());
+
+        return regionalInfo;
+    }
 }
