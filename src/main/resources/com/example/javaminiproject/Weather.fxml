@@ -18,7 +18,7 @@
       <URL value="@Weather.css" />
    </stylesheets>
    <children>
-      <Pane prefHeight="768.0" prefWidth="335.0" styleClass="navigation-pane">
+      <Pane maxWidth="338.0" prefHeight="768.0" prefWidth="350.0" styleClass="navigation-pane">
          <children>
             <Pane prefHeight="114.0" prefWidth="119.0" styleClass="icon-pane" />
             <Pane layoutX="119.0" prefHeight="114.0" prefWidth="200.0" styleClass="title-pane">
@@ -92,218 +92,67 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="recommendations" layoutX="44.0" layoutY="307.0" mnemonicParsing="false" onAction="#onRecommendationsButtonClicked" prefHeight="217.0" prefWidth="296.0" text="Recommendations">
-                     <font>
-                        <Font name="Fira Code SemiBold" size="18.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
-                           <image>
-                              <Image url="@images/navigation/favorite.png" />
-                           </image>
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
             </Pane>
          </children>
       </Pane>
-      <Pane prefHeight="768.0" prefWidth="1065.0" styleClass="weather-pane">
+      <Pane prefHeight="768.0" prefWidth="1040.0" styleClass="weather-pane">
          <children>
             <VBox layoutX="7.0" />
             <Pane>
                <children>
-                  <Label fx:id="topLable" alignment="CENTER" prefHeight="67.0" prefWidth="1041.0" text="Weather Forecast">
+                  <Label fx:id="topLable" alignment="CENTER" layoutX="-5.0" prefHeight="67.0" prefWidth="1037.0" styleClass="weather-forecast">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Button fx:id="backBtn" layoutX="3.0" layoutY="9.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="50.0" prefWidth="91.0" text="&lt; Back">
+                  <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="50.0" prefWidth="129.0" text="&lt; Back">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="inputSearch" alignment="CENTER" layoutX="843.0" layoutY="19.0" promptText="Search" />
-                  <ImageView fx:id="searchImg" fitHeight="25.0" fitWidth="16.0" layoutX="849.0" layoutY="25.0" opacity="0.62" pickOnBounds="true" preserveRatio="true">
+                  <TextField fx:id="inputSearch" layoutX="367.0" layoutY="14.0" promptText="Search" styleClass="serach-field" />
+                  <ImageView fx:id="searchImg" fitHeight="25.0" fitWidth="25.0" layoutX="378.0" layoutY="21.0" opacity="0.62" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/weather/search.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <HBox fx:id="weather7DaysHBox" layoutX="8.0" layoutY="451.0" prefHeight="257.0" prefWidth="1023.0">
+            <HBox fx:id="weather7DaysHBox" layoutY="451.0" prefHeight="257.0" prefWidth="1023.0" />
+            <Pane fx:id="todayWeatherPane" layoutX="49.0" layoutY="94.0" prefHeight="257.0" prefWidth="917.0" styleClass="today-pane">
                <children>
-                  <VBox fx:id="day1VBox" prefHeight="200.0" prefWidth="131.0">
-                     <children>
-                        <Label fx:id="day1" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Mon" textFill="#0f1ae8">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="day1Img" fitHeight="131.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/weather/clouds.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="day1W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="day2VBox" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
-                     <children>
-                        <Label fx:id="day2" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Tue">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="day2Img" fitHeight="131.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/weather/drizzle.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="day2W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="day3VBox" layoutX="141.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
-                     <children>
-                        <Label fx:id="day3" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Wed">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="day3Img" fitHeight="131.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/weather/mist.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="day3W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="day4VBox" layoutX="272.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
-                     <children>
-                        <Label fx:id="day4" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Thu">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="day4Img" fitHeight="131.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/weather/rain.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="day4W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="day5VBox" layoutX="403.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
-                     <children>
-                        <Label fx:id="day5" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Fri">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="day5Img" fitHeight="131.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/weather/clouds.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="day5W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="day6VBox" layoutX="534.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
-                     <children>
-                        <Label fx:id="day6" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Sat">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="day6Img" fitHeight="131.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/weather/clouds.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="day6W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="day7VBox" layoutX="665.0" layoutY="10.0" prefHeight="200.0" prefWidth="131.0">
-                     <children>
-                        <Label fx:id="day7" alignment="CENTER" prefHeight="58.0" prefWidth="131.0" text="Sun">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="day7Img" fitHeight="131.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/weather/clouds.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="day7W" alignment="CENTER" prefHeight="66.0" prefWidth="131.0" text="28°C">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <Pane fx:id="todayWeatherPane" layoutX="49.0" layoutY="94.0" prefHeight="257.0" prefWidth="917.0">
-               <children>
-                  <ImageView fx:id="todayWeatherImg" fitHeight="200.0" fitWidth="200.0" layoutX="694.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="todayWeatherImg" fitHeight="200.0" fitWidth="200.0" layoutX="643.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/weather/clear.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="city" alignment="CENTER" layoutX="14.0" layoutY="16.0" prefHeight="17.0" prefWidth="295.0" text="Colombo">
+                  <Label fx:id="city" alignment="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="17.0" prefWidth="295.0" text="Colombo">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="todayeHumidity" alignment="CENTER" layoutX="711.0" layoutY="211.0" prefHeight="17.0" prefWidth="180.0" text="Humidity: 75%">
+                  <Label fx:id="todayHumidity" alignment="CENTER" layoutX="660.0" layoutY="229.0" prefHeight="17.0" prefWidth="180.0" text="Humidity: 75%">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="todayTemp" alignment="CENTER" layoutX="14.0" layoutY="43.0" prefHeight="96.0" prefWidth="295.0" text="28°C">
+                  <Label fx:id="todayTemp" alignment="CENTER" layoutX="88.0" layoutY="56.0" prefHeight="96.0" prefWidth="295.0" text="28°C">
                      <font>
                         <Font size="60.0" />
                      </font>
                   </Label>
-                  <Label fx:id="todayWeather" alignment="CENTER" layoutX="14.0" layoutY="147.0" prefHeight="17.0" prefWidth="295.0" text="Sunny">
+                  <Label fx:id="todayWeather" alignment="CENTER" layoutX="88.0" layoutY="160.0" prefHeight="17.0" prefWidth="295.0" text="Sunny">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="todayDateTime" alignment="CENTER" layoutX="14.0" layoutY="181.0" prefHeight="17.0" prefWidth="295.0" text="Monday, 11:00 AM">
+                  <Label fx:id="todayDateTime" alignment="CENTER" layoutX="88.0" layoutY="194.0" prefHeight="17.0" prefWidth="295.0" text="Monday, 11:00 AM">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="todayWind" alignment="CENTER" layoutX="14.0" layoutY="217.0" prefHeight="17.0" prefWidth="295.0" text="Wind: 10 km/h">
+                  <Label fx:id="todayWind" alignment="CENTER" layoutX="88.0" layoutY="230.0" prefHeight="17.0" prefWidth="295.0" text="Wind: 10 km/h">
                      <font>
                         <Font size="24.0" />
                      </font>

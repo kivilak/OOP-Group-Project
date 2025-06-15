@@ -13,6 +13,7 @@ import java.io.IOException;
 
 
 public class RegionalInfoController {
+
     public class RegionalInfo {
         // Attributes
         private int id;
@@ -88,6 +89,8 @@ public class RegionalInfoController {
 
        */
     }
+
+
 
 
     @FXML

@@ -32,13 +32,13 @@ public class MapController implements Initializable {
         TextField search_field = new TextField();
         search_field.setPromptText("Search");
         search_field.setLayoutX(250);
-        search_field.setLayoutY(50);
+        search_field.setLayoutY(15);
         search_field.getStyleClass().add("serach-field");
         map_dashboard.getChildren().add(search_field);
 
         Button search_button = new Button("Search");
         search_button.setLayoutX(570);
-        search_button.setLayoutY(50);
+        search_button.setLayoutY(15);
         search_button.getStyleClass().add("search-button");
         map_dashboard.getChildren().add(search_button);
 
@@ -47,8 +47,8 @@ public class MapController implements Initializable {
         WebView webView = getWebView("sri+lanka");
         stackPane.getChildren().add(webView);
 
-        stackPane.setLayoutX(20);
-        stackPane.setLayoutY(130);
+        stackPane.setLayoutX(0);
+        stackPane.setLayoutY(67);
         map_dashboard.getChildren().add(stackPane);
 
         search_button.setOnAction(event -> {
@@ -61,16 +61,10 @@ public class MapController implements Initializable {
     @NotNull
     private WebView getWebView(String location) {
         WebView webView = new WebView();
-        webView.setPrefSize(1000, 600);
+        webView.setPrefSize(1040, 701);
         WebEngine webEngine = webView.getEngine();
         String url = "https://www.google.com/maps/place/" + location + "/@7.8731,80.7718,7z/data=!3m1!4b1!4m6!3m5!1s0x3ae25c2f2f2f2f2f:0x3ae25c2f2f2f2f2f!8m2!3d7.8731!4d80.7718!16zL20vMDJtZzQ?entry=ttu";
         webEngine.load(url);
-
-        Rectangle rectangle = new Rectangle(0, 0, 1000, 600);
-        rectangle.setArcHeight(30);
-        rectangle.setArcWidth(30);
-        webView.setClip(rectangle);
-
         webView.setLayoutX(0);
         webView.setLayoutY(0);
         return webView;
@@ -93,13 +87,6 @@ public class MapController implements Initializable {
     @FXML
     private void onWeatherButtonClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Weather.fxml"));
-        Parent root = loader.load();
-        SeaExplorer.scene.setRoot(root);
-    }
-
-    @FXML
-    private void onRecommendationsButtonClicked() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Recommendations.fxml"));
         Parent root = loader.load();
         SeaExplorer.scene.setRoot(root);
     }
