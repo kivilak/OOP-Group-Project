@@ -82,9 +82,11 @@ public class RegionalInfoController {
             this.type = type;
         }
 
-        public void setRating(float rating) {
+      /*  public void setRating(float rating) {
             this.rating =; rating;
     }
+
+       */
     }
 
 
@@ -116,5 +118,11 @@ public class RegionalInfoController {
         SeaExplorer.scene.setRoot(root);
     }
 
+    @FXML
+    private void onRegionButtonClicked(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RegionalMoreInfo.fxml"));
+        Parent root = loader.load();
+        SeaExplorer.scene.setRoot(root);
+    }
 
 }

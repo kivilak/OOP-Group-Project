@@ -105,7 +105,10 @@
             </Pane>
          </children>
       </Pane>
-      <Pane prefHeight="768.0" prefWidth="1060.0" styleClass="regionalinfo-pane" />
+      <Pane prefHeight="768.0" prefWidth="1060.0" styleClass="regionalinfo-pane">
+         <children>
+            <Button layoutX="93.0" layoutY="118.0" mnemonicParsing="false" onAction="#onRegionButtonClicked" text="Button" />
+         </children></Pane>
    </children>
    <stylesheets>
       <URL value="@RegionalInfo.css" />
