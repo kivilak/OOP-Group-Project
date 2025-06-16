@@ -1,0 +1,30 @@
+.up-pane{
+ -fx-background-color: #0277bd;
+}
+
+.more-button{
+     -fx-background-color: #0277bd;
+        -fx-text-fill: white;
+        -fx-font-size: 20px;
+        -fx-padding: 6px 12px;
+        -fx-background-radius: 18px;
+        -fx-cursor: hand;
+        -fx-border-color: #578FCA;
+        -fx-border-radius: 18px;
+}
+
+.more-details-label{
+     -fx-background-color: #0277bd;
+        -fx-text-fill: white;
+        -fx-font-weight: bold;
+        -fx-font-size: 28px;
+
+}
+
+.more-topic{
+     -fx-background-color: white;
+            -fx-text-fill: #0277bd;
+            -fx-font-weight: bold;
+            -fx-font-size: 28px;
+
+}
