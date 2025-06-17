@@ -25,6 +25,7 @@ import java.net.URL;
 
 
 public class MapController implements Initializable {
+    protected String location = "Sri+Lanka";
     @FXML
     private Pane map_dashboard;
 
@@ -55,7 +56,7 @@ public class MapController implements Initializable {
 
         StackPane stackPane = new StackPane();
         stackPane.getStyleClass().add("map-dashboard");
-        WebView webView = getWebView("sri+lanka");
+        WebView webView = getWebView(this.location);
         stackPane.getChildren().add(webView);
 
         stackPane.setLayoutX(0);
