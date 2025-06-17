@@ -219,11 +219,4 @@ public class DashboardController implements Initializable {
         Parent root = loader.load();
         SeaExplorer.scene.setRoot(root);
     }
-
-    @FXML
-    private void onRecommendationsButtonClicked() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Recommendations.fxml"));
-        Parent root = loader.load();
-        SeaExplorer.scene.setRoot(root);
-    }
 }

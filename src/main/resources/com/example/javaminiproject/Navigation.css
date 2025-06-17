@@ -8,7 +8,9 @@
 
 .navigation-pane {
   -fx-background-color: #3674B5;
-  -fx-pref-width: 350px;
+  -fx-pref-width: 338px;
+  -fx-max-width: 338px;
+  -fx-min-width: 338px;
 }
 .navigation-pane .icon-pane {
   -fx-background-image: url("images/appicon/icon1.png");

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,6 +22,8 @@ import java.time.format.DateTimeFormatter;
 
 
 public class WeatherController implements Initializable {
+    protected String location = "Sri Lanka"; // default location
+
     @FXML
     private Label city;
 
@@ -43,10 +46,13 @@ public class WeatherController implements Initializable {
     private ImageView todayWeatherImg;
 
     @FXML
-    private TextField inputSearch;
+    private HBox weather7DaysHBox;
 
     @FXML
-    private HBox weather7DaysHBox;
+    private Pane weather_pane;
+
+    @FXML
+    private Pane top_pane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,11 +63,32 @@ public class WeatherController implements Initializable {
         //fetch defualt weather info for Sri Lanka
         FetchWeatherInfo fetchWeatherInfo = new FetchWeatherInfo();
 
-        DisplayWeather(fetchWeatherInfo, now, "Sri Lanka");
+        DisplayWeather(fetchWeatherInfo, now, this.location);
 
-        inputSearch.setOnKeyReleased(e -> {
+        TextField search_field = new TextField();
+        search_field.setPromptText("Search");
+        search_field.setLayoutX(373);
+        search_field.setLayoutY(14);
+        search_field.getStyleClass().add("serach-field");
+        top_pane.getChildren().add(search_field);
+
+        Button back_button = new Button("Back");
+        back_button.setLayoutX(20);
+        back_button.setLayoutY(14);
+        back_button.getStyleClass().add("back-button");
+        top_pane.getChildren().add(back_button);
+
+        URL search_url = getClass().getResource("images/weather/search.png");
+
+        try {
+            DisplayImage(search_url.toString(), weather_pane, 25, 25, 378, 22);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        search_field.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.ENTER) {
-                String text = inputSearch.getText();
+                String text = search_field.getText();
                 DisplayWeather(fetchWeatherInfo, now, text);
             }
         });
@@ -75,7 +102,7 @@ public class WeatherController implements Initializable {
 
         city.setText(location.toUpperCase());
         todayTemp.setText(weatherInfo[0].getTemp() + " °c");
-        todayWeather.setText(weatherInfo[0].getMain());
+        todayWeather.setText(Character.toUpperCase(weatherInfo[0].getDescription().charAt(0)) + weatherInfo[0].getDescription().substring(1));
         todayDateTime.setText(now.format(fromatDate));
         todayWind.setText(weatherInfo[0].getWindSpeed() + " km/h");
         todayHumidity.setText("Humiditiy: " + weatherInfo[0].getHumidity() + " %");

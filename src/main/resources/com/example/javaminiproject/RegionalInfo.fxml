@@ -15,7 +15,7 @@
 
 <HBox prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaminiproject.RegionalInfoController">
    <children>
-      <Pane prefHeight="768.0" prefWidth="350.0" styleClass="navigation-pane">
+      <Pane maxWidth="350.0" prefHeight="768.0" prefWidth="350.0" styleClass="navigation-pane">
          <children>
             <Pane prefHeight="114.0" prefWidth="119.0" styleClass="icon-pane" />
             <Pane layoutX="119.0" prefHeight="114.0" prefWidth="200.0" styleClass="title-pane">
@@ -89,36 +89,16 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="recommendations" layoutX="44.0" layoutY="307.0" mnemonicParsing="false" onAction="#onRecommendationsButtonClicked" prefHeight="217.0" prefWidth="296.0" text="Recommendations">
-                     <font>
-                        <Font name="Fira Code SemiBold" size="18.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
-                           <image>
-                              <Image url="@images/navigation/favorite.png" />
-                           </image>
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
             </Pane>
          </children>
       </Pane>
       <Pane prefHeight="768.0" prefWidth="1017.0">
          <children>
-            <Pane layoutX="108.0" layoutY="14.0" prefHeight="66.0" prefWidth="807.0" styleClass="top-bar">
+            <Pane fx:id="top_pane" maxHeight="68.0" maxWidth="1300.0" minHeight="68.0" prefHeight="68.0" prefWidth="1300.0" styleClass="top-bar" />
+            <Pane fx:id="pane" layoutX="18.0" layoutY="89.0" prefHeight="655.0" prefWidth="980.0">
                <children>
-                  <Button fx:id="backbtn" layoutX="33.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="25.0" prefWidth="113.0" styleClass="back-btn" text="&lt; back" />
-                  <Label layoutX="241.0" layoutY="13.0" prefHeight="40.0" prefWidth="295.0" styleClass="title-label" text="Regional Information" />
-               </children>
-            </Pane>
-            <Pane fx:id="pane" layoutX="98.0" layoutY="111.0" prefHeight="655.0" prefWidth="827.0">
-               <children>
-                  <HBox fx:id="hbox" layoutX="13.0" layoutY="131.0" prefHeight="66.0" prefWidth="802.0" spacing="70.0">
+                  <HBox fx:id="hbox" layoutX="99.0" layoutY="-5.0" prefHeight="66.0" prefWidth="802.0" spacing="70.0">
                      <children>
                         <Button fx:id="seaLife_btn" mnemonicParsing="false" prefHeight="35.0" prefWidth="220.0" styleClass="SeaLife" text="Sea Life">
                            <HBox.margin>
@@ -136,7 +116,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </Button>
-                        <Button id=" " fx:id="swimming_btn" mnemonicParsing="false" prefHeight="35.0" prefWidth="220.0" styleClass="beach_spot" text="Beaches &amp; Swimming Spots">
+                        <Button id=" " fx:id="swimming_btn" mnemonicParsing="false" prefHeight="35.0" prefWidth="220.0" styleClass="beach_spot" text="Beaches">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
@@ -146,7 +126,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ScrollPane id="cardgrid" fx:id="backgroundcard" depthTest="DISABLE" layoutY="229.0" prefHeight="391.0" prefWidth="827.0" stylesheets="@RegionalInfo.css">
+                  <ScrollPane id="cardgrid" fx:id="backgroundcard" depthTest="DISABLE" layoutY="66.0" styleClass="scrol-pane" stylesheets="@RegionalInfo.css">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>

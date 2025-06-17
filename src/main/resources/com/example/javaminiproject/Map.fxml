@@ -94,6 +94,6 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="map_dashboard" prefHeight="768.0" prefWidth="1060.0" styleClass="map-pane" />
+      <Pane fx:id="map_dashboard" prefHeight="768.0" prefWidth="1060.0" styleClass="map-pane" HBox.hgrow="ALWAYS" />
    </children>
 </HBox>

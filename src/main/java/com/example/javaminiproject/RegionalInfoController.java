@@ -41,22 +41,31 @@ public class RegionalInfoController implements Initializable{
     @FXML
     private ScrollPane backgroundcard;
 
+    @FXML
+    private Pane top_pane;
 
     @Override
     public void initialize(java.net.URL location,java.util. ResourceBundle resources) {
-
         TextField search_field = new TextField();
         search_field.setPromptText("Search");
-        search_field.setLayoutX(200);
-        search_field.setLayoutY(37);
+        search_field.setLayoutX(373);
+        search_field.setLayoutY(14);
         search_field.getStyleClass().add("serach-field");
-        pane.getChildren().add(search_field);
+        top_pane.getChildren().add(search_field);
 
-        Button search_button = new Button("Search");
-        search_button.setLayoutX(520);
-        search_button.setLayoutY(37);
-        search_button.getStyleClass().add("search-button");
-        pane.getChildren().add(search_button);
+        Button back_button = new Button("Back");
+        back_button.setLayoutX(20);
+        back_button.setLayoutY(14);
+        back_button.getStyleClass().add("back-button");
+        top_pane.getChildren().add(back_button);
+
+        URL search_url = getClass().getResource("images/weather/search.png");
+
+        try {
+            DisplayImage(search_url.toString(), top_pane, 25, 25, 384, 22);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         seaLifeGrid = loadGrid("SeaLife");
         CoralReefsGrid = loadGrid("CoralReefs");
@@ -65,9 +74,6 @@ public class RegionalInfoController implements Initializable{
         backgroundcard.setClip(null);
         backgroundcard.setContent(seaLifeGrid);
         backgroundcard.setStyle("-fx-background-color:transparent;");
-
-
-
 
         seaLife_btn.setOnAction(e-> {
             try {
@@ -90,43 +96,25 @@ public class RegionalInfoController implements Initializable{
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
-
-
         });
-
-
-
-
-
     }
     private GridPane loadGrid(String tableName) {
         GridPane grid = createGrid();
-        try (MySQLConnection mySQLConnection = new MySQLConnection()) {
-            try (Connection connect = mySQLConnection.connection) {
-                try (Statement statement = connect.createStatement()) {
-                    try (ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tableName)) {
 
-                        int index = 0;
-                        while (resultSet.next()) {
-                            String title = resultSet.getString("title");
-                            String imagePath = resultSet.getString("image");
-                            String shortDesc = resultSet.getString("short_description");
-                            String fullDesc = resultSet.getString("full_description");
+        MySQLConnection mySQLConnection = new MySQLConnection();
 
-                            URL imageUrl = getClass().getResource(imagePath);
-                            if (imageUrl != null) {
-                                addCard(grid, index, title, imageUrl.toString(), shortDesc, fullDesc);
-                                index++;
-                            }
-                        }
-                    }
-                }
+        RegionalInfo[] regionalInfo = mySQLConnection.getRegionalInfo();
+
+        for (int i = 0; i < regionalInfo.length; i++) {
+            RegionalInfo info = regionalInfo[i];
+
+            try {
+                addCard(grid, i, info);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
+
         return grid;
     }
 
@@ -141,22 +129,23 @@ public class RegionalInfoController implements Initializable{
         return grid;
     }
     @FXML
-    private void addCard(GridPane grid, int index, String title, String imageUrl, String shortDesc, String fullDesc) throws IOException {
+    private void addCard(GridPane grid, int index, RegionalInfo regionalInfo) throws IOException {
         //add the image to card
-        Image  image= new Image(imageUrl,true);
+        String imageUrl = getClass().getResource(regionalInfo.getImage_url()).toString();
+        Image image = new Image(imageUrl,true);
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(150);
-        imageView.setFitWidth(220);
+        imageView.setFitWidth(280);
         imageView.setPreserveRatio(false);
         imageView.setSmooth(true);
         imageView.getStyleClass().add("images");
 
         //add title to card
-        Label labeltitle = new Label(title);
+        Label labeltitle = new Label(regionalInfo.getName());
         labeltitle.getStyleClass().add("titleD");
 
         //add Short Description to card
-        Label labelShort = new Label(shortDesc);
+        Label labelShort = new Label(regionalInfo.getSmall_description());
         labelShort.getStyleClass().add("shortD");
 
         Button MoreInfoBtn = new Button("More Info");
@@ -164,29 +153,45 @@ public class RegionalInfoController implements Initializable{
         MoreInfoBtn.getStyleClass().add("MoreInfobtn");
 
         MoreInfoBtn.setOnAction(e -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RegionalMoreInfo.fxml"));
+            Parent root = null;
+
+            loader.setControllerFactory(param -> {
+                RegionalMoreInfoController controller = new RegionalMoreInfoController();
+                controller.regionalInfo = regionalInfo;
+                return controller;
+            });
+
+            try {
+                root = loader.load();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            SeaExplorer.scene.setRoot(root);
+
+            /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("More about");
             alert.setHeaderText(title);
             alert.setContentText(fullDesc);
-            alert.showAndWait();
+            alert.showAndWait();*/
         });
 
         VBox card = new VBox(imageView, labeltitle, labelShort, MoreInfoBtn);
-        card.getStyleClass().add("Card-profile");
-        card.setClip(CardClipping(220,300));
+        card.getStyleClass().add("card-profile");
+        card.setClip(CardClipping(280,300));
         VBox.setMargin(labeltitle,new Insets(0.0,0.0,0.0,10.0) );
         VBox.setMargin(labelShort,new Insets(0.0,0.0,0.0,10.0));
         VBox.setMargin(MoreInfoBtn,new Insets(0.0,10.0,0.0,140.0));
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(card);
+        stackPane.getStyleClass().add("stack-pane");
 
         GridPane.setMargin(card,new Insets(10.0));
 
         int col = index % 3;
         int row = index / 3;
-        grid.add(card, col, row);
-
-
-
-
+        grid.add(stackPane, col, row);
     }
 
 
@@ -196,6 +201,18 @@ public class RegionalInfoController implements Initializable{
         rectangle.setArcWidth(70);
 
         return rectangle;
+    }
+
+    @FXML
+    private void DisplayImage(String url, Pane pane, int width, int height, int layoutX, int layoutY) throws IOException {
+        Image image = new Image(url, true);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(height);
+        imageView.setFitWidth(width);
+        imageView.setPreserveRatio(true);
+        imageView.setLayoutX(layoutX);
+        imageView.setLayoutY(layoutY);
+        pane.getChildren().add(imageView);
     }
 
     @FXML

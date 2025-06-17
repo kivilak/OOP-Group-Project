@@ -87,21 +87,6 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="recommendations" layoutX="44.0" layoutY="307.0" mnemonicParsing="false" onAction="#onRecommendationsButtonClicked" prefHeight="217.0" prefWidth="296.0" text="Recommendations">
-                     <font>
-                        <Font name="Fira Code SemiBold" size="18.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
-                           <image>
-                              <Image url="@images/navigation/favorite.png" />
-                           </image>
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                </children>
             </Pane>
          </children>
