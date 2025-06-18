@@ -56,6 +56,7 @@
   .details-label {
     -fx-font: 18 "FiraCode";
     -fx-alignment: center;
+    -fx-wrap-text: true;
   }
 
   .weather-data {
