@@ -25,6 +25,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 
 /**
  * @author Kivilak Chathuranga
@@ -32,17 +33,21 @@ import java.sql.Statement;
 
 
 public class RegionalInfoController implements Initializable{
+    private boolean seaLifeToggle = true, coralReefToggle = true, beachToggle = true;
 
-    private GridPane seaLifeGrid,CoralReefsGrid,SwimmingSpotGrid;
     @FXML
-    private Button seaLife_btn,coralReef_btn,swimming_btn;
+    private Button seaLife_btn,coralReef_btn,beach_btn;
+
     @FXML
     private Pane pane;
+
     @FXML
     private ScrollPane backgroundcard;
 
     @FXML
     private Pane top_pane;
+
+    private MySQLConnection mySQLConnection = new MySQLConnection();
 
     @Override
     public void initialize(java.net.URL location,java.util. ResourceBundle resources) {
@@ -67,43 +72,76 @@ public class RegionalInfoController implements Initializable{
             throw new RuntimeException(e);
         }
 
-        seaLifeGrid = loadGrid("SeaLife");
-        CoralReefsGrid = loadGrid("CoralReefs");
-        SwimmingSpotGrid = loadGrid("SwimmingSpots");
-
         backgroundcard.setClip(null);
-        backgroundcard.setContent(seaLifeGrid);
         backgroundcard.setStyle("-fx-background-color:transparent;");
+        backgroundcard.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        displayGrid();
 
         seaLife_btn.setOnAction(e-> {
-            try {
-                backgroundcard.setContent(seaLifeGrid);
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
+            seaLifeToggle = setToggleState(seaLifeToggle);
+            displayGrid();
         });
 
         coralReef_btn.setOnAction(e-> {
-            try {
-                backgroundcard.setContent(CoralReefsGrid);
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
+            coralReefToggle = setToggleState(coralReefToggle);
+            displayGrid();
         });
-        swimming_btn.setOnAction(e-> {
-            try {
-                backgroundcard.setContent(SwimmingSpotGrid);
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
+        beach_btn.setOnAction(e-> {
+            beachToggle = setToggleState(beachToggle);
+            displayGrid();
         });
     }
-    private GridPane loadGrid(String tableName) {
+
+    public void displayGrid() {
+        RegionalInfo[] regionalInfo;
+
+        setActiveStates(seaLifeToggle, seaLife_btn);
+        setActiveStates(coralReefToggle, coralReef_btn);
+        setActiveStates(beachToggle, beach_btn);
+
+        if(seaLifeToggle & coralReefToggle & beachToggle) {
+            regionalInfo = mySQLConnection.getRegionalInfo();
+            backgroundcard.setContent(loadGrid(regionalInfo));
+        } else if(seaLifeToggle & coralReefToggle) {
+            regionalInfo = Arrays.copyOf(mySQLConnection.getRegionalInfoByType("coral reef"), mySQLConnection.getRegionalInfoByType("coral reef").length + mySQLConnection.getRegionalInfoByType("sea life").length);
+            System.arraycopy(mySQLConnection.getRegionalInfoByType("sea life"), 0, regionalInfo, mySQLConnection.getRegionalInfoByType("coral reef").length, mySQLConnection.getRegionalInfoByType("sea life").length);
+            backgroundcard.setContent(loadGrid(regionalInfo));
+        } else if(seaLifeToggle & beachToggle) {
+            regionalInfo = Arrays.copyOf(mySQLConnection.getRegionalInfoByType("beach"), mySQLConnection.getRegionalInfoByType("beach").length + mySQLConnection.getRegionalInfoByType("sea life").length);
+            System.arraycopy(mySQLConnection.getRegionalInfoByType("sea life"), 0, regionalInfo, mySQLConnection.getRegionalInfoByType("beach").length, mySQLConnection.getRegionalInfoByType("sea life").length);
+            backgroundcard.setContent(loadGrid(regionalInfo));
+        } else if(coralReefToggle & beachToggle) {
+            regionalInfo = Arrays.copyOf(mySQLConnection.getRegionalInfoByType("coral reef"), mySQLConnection.getRegionalInfoByType("coral reef").length + mySQLConnection.getRegionalInfoByType("beach").length);
+            System.arraycopy(mySQLConnection.getRegionalInfoByType("beach"), 0, regionalInfo, mySQLConnection.getRegionalInfoByType("coral reef").length, mySQLConnection.getRegionalInfoByType("beach").length);
+            backgroundcard.setContent(loadGrid(regionalInfo));
+        } else if(seaLifeToggle) {
+            regionalInfo = mySQLConnection.getRegionalInfoByType("sea life");
+            backgroundcard.setContent(loadGrid(regionalInfo));
+        } else if(coralReefToggle) {
+            regionalInfo = mySQLConnection.getRegionalInfoByType("coral reef");
+            backgroundcard.setContent(loadGrid(regionalInfo));
+        } else if(beachToggle) {
+            regionalInfo = mySQLConnection.getRegionalInfoByType("beach");
+            backgroundcard.setContent(loadGrid(regionalInfo));
+        } else {
+            backgroundcard.setContent(null);
+        }
+    }
+
+    public void setActiveStates(boolean state, Button button) {
+        button.getStyleClass().remove("active");
+        if (state) {
+            button.getStyleClass().add("active");
+        }
+    }
+
+    public boolean setToggleState(boolean state) {
+        return !state;
+    }
+
+    private GridPane loadGrid(RegionalInfo[] regionalInfo) {
         GridPane grid = createGrid();
-
-        MySQLConnection mySQLConnection = new MySQLConnection();
-
-        RegionalInfo[] regionalInfo = mySQLConnection.getRegionalInfo();
 
         for (int i = 0; i < regionalInfo.length; i++) {
             RegionalInfo info = regionalInfo[i];

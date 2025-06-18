@@ -46,6 +46,7 @@
 .moreInfo-pane .details-label {
   -fx-font: 18 "FiraCode";
   -fx-alignment: center;
+  -fx-wrap-text: true;
 }
 .moreInfo-pane .weather-data {
   -fx-background-color: #A1E3F9;

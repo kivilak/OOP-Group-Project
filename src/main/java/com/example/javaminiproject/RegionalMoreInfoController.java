@@ -56,6 +56,10 @@ public class RegionalMoreInfoController implements Initializable {
             String imageUrl = getClass().getResource(regionalInfo.getImage_url()).toString();
             Image image = new Image(imageUrl, true);
             MainImage.setImage(image);
+            MainImage.setPreserveRatio(false);
+            MainImage.setSmooth(true);
+            MainImage.setFitWidth(413);
+            MainImage.setFitHeight(257);
             DisplayWeather(regionalInfo.getDistrict());
             ratingLabel.setText("🏊‍♂️"+ regionalInfo.getType() +"   ⭐ " + regionalInfo.getRating());
         } else {
