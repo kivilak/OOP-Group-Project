@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -39,19 +40,19 @@ public class RegionalInfoController implements Initializable{
     private Button seaLife_btn,coralReef_btn,beach_btn;
 
     @FXML
-    private Pane pane;
-
-    @FXML
     private ScrollPane backgroundcard;
 
     @FXML
     private Pane top_pane;
 
     private MySQLConnection mySQLConnection = new MySQLConnection();
+    private RegionalInfo[] regionalInfo;
+    private RegionalInfo[] allRegionalInfo;
 
     @Override
     public void initialize(java.net.URL location,java.util. ResourceBundle resources) {
-        TextField search_field = new TextField();
+        final String[] search_location = new String[1];
+        final TextField search_field = new TextField();
         search_field.setPromptText("Search");
         search_field.setLayoutX(373);
         search_field.setLayoutY(14);
@@ -75,7 +76,9 @@ public class RegionalInfoController implements Initializable{
         backgroundcard.setClip(null);
         backgroundcard.setStyle("-fx-background-color:transparent;");
         backgroundcard.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        backgroundcard.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
+        allRegionalInfo = mySQLConnection.getRegionalInfo();
         displayGrid();
 
         seaLife_btn.setOnAction(e-> {
@@ -91,38 +94,64 @@ public class RegionalInfoController implements Initializable{
             beachToggle = setToggleState(beachToggle);
             displayGrid();
         });
+
+        search_field.setOnKeyReleased(e -> {
+            if(e.getCode() == KeyCode.ENTER) {
+                search_location[0] = search_field.getText();
+                RegionalInfo[] filteredRegionalInfo = Arrays.stream(regionalInfo)
+                    .filter(regionalInfo1 ->
+                            (regionalInfo1.getName().toLowerCase().contains(search_field.getText().toLowerCase())) |
+                            (regionalInfo1.getLocation().toLowerCase().contains(search_field.getText().toLowerCase())) |
+                            (regionalInfo1.getDistrict().toLowerCase().contains(search_field.getText().toLowerCase())))
+                    .toArray(RegionalInfo[]::new);
+                backgroundcard.setContent(loadGrid(filteredRegionalInfo));
+            }
+        });
     }
 
     public void displayGrid() {
-        RegionalInfo[] regionalInfo;
-
         setActiveStates(seaLifeToggle, seaLife_btn);
         setActiveStates(coralReefToggle, coralReef_btn);
         setActiveStates(beachToggle, beach_btn);
 
         if(seaLifeToggle & coralReefToggle & beachToggle) {
-            regionalInfo = mySQLConnection.getRegionalInfo();
+            regionalInfo = Arrays.copyOf(allRegionalInfo, allRegionalInfo.length);
             backgroundcard.setContent(loadGrid(regionalInfo));
         } else if(seaLifeToggle & coralReefToggle) {
-            regionalInfo = Arrays.copyOf(mySQLConnection.getRegionalInfoByType("coral reef"), mySQLConnection.getRegionalInfoByType("coral reef").length + mySQLConnection.getRegionalInfoByType("sea life").length);
-            System.arraycopy(mySQLConnection.getRegionalInfoByType("sea life"), 0, regionalInfo, mySQLConnection.getRegionalInfoByType("coral reef").length, mySQLConnection.getRegionalInfoByType("sea life").length);
+            regionalInfo = Arrays.stream(allRegionalInfo)
+                    .filter(regionalInfo1 ->
+                            (regionalInfo1.getType().toLowerCase().contains("sea life")) | (regionalInfo1.getType().toLowerCase().contains("coral reef")))
+                    .toArray(RegionalInfo[]::new);
             backgroundcard.setContent(loadGrid(regionalInfo));
         } else if(seaLifeToggle & beachToggle) {
-            regionalInfo = Arrays.copyOf(mySQLConnection.getRegionalInfoByType("beach"), mySQLConnection.getRegionalInfoByType("beach").length + mySQLConnection.getRegionalInfoByType("sea life").length);
-            System.arraycopy(mySQLConnection.getRegionalInfoByType("sea life"), 0, regionalInfo, mySQLConnection.getRegionalInfoByType("beach").length, mySQLConnection.getRegionalInfoByType("sea life").length);
+            regionalInfo = Arrays.stream(allRegionalInfo)
+                    .filter(regionalInfo1 ->
+                            (regionalInfo1.getType().toLowerCase().contains("beach")) | (regionalInfo1.getType().toLowerCase().contains("sea life")))
+                    .toArray(RegionalInfo[]::new);
             backgroundcard.setContent(loadGrid(regionalInfo));
         } else if(coralReefToggle & beachToggle) {
-            regionalInfo = Arrays.copyOf(mySQLConnection.getRegionalInfoByType("coral reef"), mySQLConnection.getRegionalInfoByType("coral reef").length + mySQLConnection.getRegionalInfoByType("beach").length);
-            System.arraycopy(mySQLConnection.getRegionalInfoByType("beach"), 0, regionalInfo, mySQLConnection.getRegionalInfoByType("coral reef").length, mySQLConnection.getRegionalInfoByType("beach").length);
+            regionalInfo = Arrays.stream(allRegionalInfo)
+                    .filter(regionalInfo1 ->
+                            (regionalInfo1.getType().toLowerCase().contains("beach")) | (regionalInfo1.getType().toLowerCase().contains("coral reef")))
+                    .toArray(RegionalInfo[]::new);
             backgroundcard.setContent(loadGrid(regionalInfo));
         } else if(seaLifeToggle) {
-            regionalInfo = mySQLConnection.getRegionalInfoByType("sea life");
+            regionalInfo = Arrays.stream(allRegionalInfo)
+                    .filter(regionalInfo1 ->
+                            regionalInfo1.getType().toLowerCase().contains("sea life"))
+                    .toArray(RegionalInfo[]::new);
             backgroundcard.setContent(loadGrid(regionalInfo));
         } else if(coralReefToggle) {
-            regionalInfo = mySQLConnection.getRegionalInfoByType("coral reef");
+            regionalInfo = Arrays.stream(allRegionalInfo)
+                    .filter(regionalInfo1 ->
+                            regionalInfo1.getType().toLowerCase().contains("coral reef"))
+                    .toArray(RegionalInfo[]::new);
             backgroundcard.setContent(loadGrid(regionalInfo));
         } else if(beachToggle) {
-            regionalInfo = mySQLConnection.getRegionalInfoByType("beach");
+            regionalInfo = Arrays.stream(allRegionalInfo)
+                    .filter(regionalInfo1 ->
+                            regionalInfo1.getType().toLowerCase().contains("beach"))
+                    .toArray(RegionalInfo[]::new);
             backgroundcard.setContent(loadGrid(regionalInfo));
         } else {
             backgroundcard.setContent(null);
