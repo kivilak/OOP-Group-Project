@@ -92,6 +92,17 @@ public class WeatherController implements Initializable {
                 DisplayWeather(fetchWeatherInfo, now, text);
             }
         });
+
+        back_button.setOnAction(event -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            SeaExplorer.scene.setRoot(root);
+        });
     }
 
     private void DisplayWeather(FetchWeatherInfo fetchWeatherInfo, LocalDateTime now, String location) {

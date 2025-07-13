@@ -107,6 +107,17 @@ public class RegionalInfoController implements Initializable{
                 backgroundcard.setContent(loadGrid(filteredRegionalInfo));
             }
         });
+
+        back_button.setOnAction(event -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            SeaExplorer.scene.setRoot(root);
+        });
     }
 
     public void displayGrid() {
