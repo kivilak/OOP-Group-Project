@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class SeaExplorer extends Application {
     protected static Scene scene = null;
+    protected int id;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -20,8 +21,6 @@ public class SeaExplorer extends Application {
     }
 
     public static void main(String[] args) {
-        MySQLConnection mySQLConnection = new MySQLConnection();
-
         launch();
     }
 }
